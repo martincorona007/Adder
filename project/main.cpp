@@ -26,11 +26,11 @@ it iter;
 itt iterb;
 tape t;
 
-int Ra=9;//--move
+int Ra=8;//--move
 int Rb=9;//static move
-int Rc=1;//++where we count the carry
-int Rs=10;//-- where we move to write in s
-int Lef=29;//-- we move to the left
+int Rc=2;//++where we count the carry
+int Rs=9;//-- where we move to write in s
+int Lef=28;//-- we move to the left
 
 int header=0;
 
@@ -81,12 +81,13 @@ int main()
     return 0;
 }
 int transition_Function(int q){
-  Ra-=1;//--move
+  /*Ra-=1;//--move
     //Rb=9;//static move
     Rc+=1;//++where we count the carry
     Rs-=1;//-- where we move to write in s
     Lef-=1;//-- we move to the left
-    //printf("Ra [%i] Rb[%i ]Rc [%i] Rs [%i] Left [%i]\n",Ra,Rb,Rc,Rs,Lef);
+    */
+    printf("Ra [%i] Rb[%i ]Rc [%i] Rs [%i] Left [%i]\n",Ra,Rb,Rc,Rs,Lef);
     if(Ra==-1&&Rc==11&&Rs==0&&Lef==19){
             //print();
         return 20;
@@ -117,6 +118,7 @@ int transition_Function(int q){
                     if(read()=='0'){
                         printf("return 5");
                          print();
+
                         return 5;
 
                     }
@@ -167,7 +169,7 @@ int transition_Function(int q){
                 case 5:
 
                     R(Rc);
-
+                        printf("Rc %i",Rc);
                     if(read()=='0'||read()==32){
                         printf("return 6");
                         //here i call to sigma to write
