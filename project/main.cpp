@@ -87,7 +87,8 @@ int transition_Function(int q){
     Rs-=1;//-- where we move to write in s
     Lef-=1;//-- we move to the left
     //printf("Ra [%i] Rb[%i ]Rc [%i] Rs [%i] Left [%i]\n",Ra,Rb,Rc,Rs,Lef);
-    if(Ra==1&&Rc==9&&Rs==2&&Lef==21){
+    if(Ra==-1&&Rc==11&&Rs==0&&Lef==19){
+            //print();
         return 20;
     }else{
             switch(q){
@@ -343,10 +344,12 @@ int adder(int qq){
     int q=0;
     int a=0;
     if(qq==20){
+
                 printf("died");
 
     }else{
         q=transition_Function(qq);
+
         a=adder(q);
     }
     return a;
