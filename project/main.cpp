@@ -1,32 +1,38 @@
 #include <iostream>
 #include <map>
 #include <stdio.h>
-void L(int);
+void L(int l=1);
 void R(int);
+void Left2(char);
+void Right2(char);
 void sigma(char);
 void print();
-
+//check the states
 int transition_Function(int,char);
 int adder(int);
 void test();
 
 char read();
 
-char c_out();
+//char c_out();
 
 typedef std::map<int,char> tape;
 typedef std::map<int,char>::iterator it;
+typedef std::map<int,char>::reverse_iterator itt;
 
+int itera();
 
 it iter;
+itt iterb;
 tape t;
 
-int Ra=8;//--move
+int Ra=9;//--move
 int Rb=9;//static move
-int Rc=2;//++where we count the carry
-int Rs=9;//-- where we move to write in s
-int Lef=28;//-- we move to the left
+int Rc=1;//++where we count the carry
+int Rs=10;//-- where we move to write in s
+int Lef=29;//-- we move to the left
 
+int header=0;
 
 int main()
 {
@@ -68,61 +74,269 @@ int main()
 
 
     test();
+    //R(8);
+    printf("\n\n\n");
 
-
+    print();
     return 0;
 }
 int transition_Function(int q){
-
+  Ra-=1;//--move
+    //Rb=9;//static move
+    Rc+=1;//++where we count the carry
+    Rs-=1;//-- where we move to write in s
+    Lef-=1;//-- we move to the left
+    //printf("Ra [%i] Rc [%i] Rs [%i] Left [%i]",Ra,Rc,Rs,Lef);
     switch(q){
 
         case 1:
-
             R(Ra);
-
-            if(iter->second==0){
+         //   R(Ra);
+               //R(Ra);
+            if(read()=='0'){
                 printf("return 2");
+                 print();
                 return 2;
 
             }
-            R(Ra);
-            if(iter->second==1){
+          //  R(Ra);
+            if(read()=='1'){
                 printf("return 4");
+                 print();
                 return 4;
 
             }
         break;
         case 2:
-            R(Rb);
-            if(iter->second==0){
+           R(Rb);
+
+            if(read()=='0'){
                 printf("return 5");
+                 print();
                 return 5;
 
             }
-            R(Rb);
-            if(iter->second==1){
+           // R(Rb);
+            if(read()=='1'){
                 printf("return 3");
+                 print();
                 return 3;
 
             }
-        break;
-        case 5:
+            break;
+        case 3:
             R(Rc);
-            if(iter->second==0||iter->second=='\0'){
-                printf("simon");
+
+            if(read()==1){
+                printf("return 17");
+                sigma('1');
+                 print();
+                return 17;
+
+            }
+           // R(Rb);
+            if(read()!='0'||read()!=32){
+                printf("return 15");
+                sigma('0');
+                 print();
+                return 15;
+
+            }
+            break;
+        case 4:
+            R(Rb);
+
+            if(read()=='0'){
+                printf("return 3");
+                 print();
+                return 3;
+
+            }
+           // R(Rb);
+            if(read()=='1'){
+                printf("return 10");
+                 print();
+                return 10;
+
+            }
+            break;
+        case 5:
+
+            R(Rc);
+
+            if(read()=='0'||read()==32){
+                printf("return 6");
                 //here i call to sigma to write
+
+
+                sigma('0');
+             //   printf("\n");
+
+                print();
+                return 6;
+            }
+            if(read()!='1'){
+                printf("return 8");
+                 print();
+                 sigma('0');
+                //here i call to sigma to write
+                return 8;
+            }
+            break;
+        case 6:
+
+            R(Rs);
+
+            if(read()==32){
+                printf("return 7");
+
+                sigma('0');
+             //  printf("\n");
+                print();
+
                 return 7;
-            }else{
-                printf("na");
             }
 
+            break;
+
+        case 7:
+                L(Lef);
+                printf("return 1");
+               // printf("\n");
+                print();
+                return 1;
+            break;
+        case 8:
+            R(Rc);
+
+            if(read()==32){
+                printf("return 9");
+
+                 sigma('1');
+                 print();
+                //here i call to sigma to write
+                return 9;
+            }
+                break;
+        case 9:
+           L(Lef);
+                printf("return 1");
+               // printf("\n");
+                print();
+                return 1;
+            break;
+        case 10:
+            R(Rc);
+
+            if(read()=='0'||read()=='\0'||read()==32){
+                printf("return 11");
+                //here i call to sigma to write
+
+
+                sigma('1');
+             //   printf("\n");
+
+                print();
+                return 11;
+            }
+            if(read()!='1'){
+                printf("return 13");
+
+                 sigma('1');
+                 print();
+                //here i call to sigma to write
+                return 13;
+            }
+            break;
+        case 11:
+            R(Rs);
+
+            if(read()==32){
+                printf("return 12");
+
+                sigma('0');
+             //  printf("\n");
+                print();
+
+                return 12;
+            }
+            break;
+        case 12:
+            L(Lef);
+                printf("return 1");
+               // printf("\n");
+                print();
+            return 1;
+            break;
+        case 13:
+            R(Rs);
+
+            if(read()==32){
+                printf("return 14");
+
+                sigma('1');
+             //  printf("\n");
+                print();
+
+                return 14;
+            }
+            break;
+        case 14:
+            L(Lef);
+                printf("return 1");
+               // printf("\n");
+                print();
+            return 1;
+            break;
+        case 15:
+             R(Rs);
+
+            if(read()==32){
+                printf("return 16");
+
+                sigma('1');
+             //  printf("\n");
+                print();
+
+                return 16;
+            }
+            break;
+        case 16:
+            L(Lef);
+                printf("return 1");
+               // printf("\n");
+                print();
+            return 1;
+            break;
+
+        case 17:
+            R(Rs);
+
+            if(read()==32){
+                printf("return 18");
+
+                sigma('0');
+             //  printf("\n");
+                print();
+
+                return 18;
+            }
+            break;
+        case 18:
+            L(Lef);
+                printf("return 1");
+               // printf("\n");
+                print();
+            return 1;
+            break;
     }
+
 
 }
 int adder(int qq){
     int q=0;
     int a=0;
-    if(qq==7){
+    if(qq==20){
                 printf("died");
 
     }else{
@@ -132,40 +346,100 @@ int adder(int qq){
     return a;
 }
 void test(){
-    adder(1);
+    printf("\nSTATE: %i",adder(1));
+   /* R(Ra);
+    printf("1=%c",read());
+    R(Rb);
+    printf("2=%c",read());
+    R(Rc);
+    printf("3=%c",read());
+    R(Rs);
+    printf("4=%c",read());
+
+    //L(Lef);
+    L();*/
+
 }
-/*
-char c_out(){
-     iter=t.find(19);
-      return iter->second;
-}*/
+
 void L(int l){
     if(l>=21&&l<=28){
-        iter=t.find(1);
-        std::cout <<iter->first  <<"+"<<iter->second;
+        header=0;
+    }else{
+        header=l;
     }
+//printf("h1 %i",header);
+
+   /* header-=l;
+
+    if(l>=21&&l<=28){
+        iterb=t.rbegin();
+        header=iterb->first;
+
+    }
+printf("h1 %i",header);
+
+*/
 }
-void R(int r){
+void R(int r=1){
+    header+=r;
+
+
     /*for (iter=t.begin(); iter<=7; ++iter){
             std::cout <<"in R " << read();
-    }*/
+    }*//*
     for (iter=t.begin(); iter!=t.end(); ++iter){
         if(iter->first==r){//check the if the key is equals to r
             //printf("%i ->%c",r ,read());
-            read();
+            printf(" R[%c] ",read());
+
+            //read();
+            printf("<I[%i]>",itera());
+           // itera();
         }
+    }*/
+  /*  iter=t.find(r);
+
+    if(iter!=t.end()){
+         printf(" R[%c] ",read());
+
+
+            printf("<I[%i]>",itera());
+
+    }
+*/
+}
+void sigma(char s){
+    //iter->second=s;
+   // iter=t.begin(itera());
+   // if(iter
+    t[header]=s;
+/*PROBLEM HERE*/
+    /*
+    iter=t.begin();
+    if(iter!=t.find(sum)))
+
+    iter->second=s;*/
+   /* for(iter;iter!=t.end();++iter){
+        iter->second=s;
+    }*/
+//t[Rs]=s;nope
+}
+
+char read(){
+
+    iter=t.find(header);
+
+    if(iter!=t.end()){
+
+        return  iter->second;
+
     }
 
 }
-void sigma(char s){
+void print(){printf("\n");
+    for(iter=t.begin();iter!=t.end();++iter){
 
-}
-char read(){
-
-return  iter->second;
-}
-void print(){
-    for (iter=t.begin(); iter!=t.end(); ++iter)
-    std::cout <<  iter->second;
+            std::cout <<"["<<iter->second<<"]";
+    }
 
 }
