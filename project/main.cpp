@@ -86,249 +86,255 @@ int transition_Function(int q){
     Rc+=1;//++where we count the carry
     Rs-=1;//-- where we move to write in s
     Lef-=1;//-- we move to the left
-    //printf("Ra [%i] Rc [%i] Rs [%i] Left [%i]",Ra,Rc,Rs,Lef);
-    switch(q){
+    //printf("Ra [%i] Rb[%i ]Rc [%i] Rs [%i] Left [%i]\n",Ra,Rb,Rc,Rs,Lef);
+    if(Ra==1&&Rc==9&&Rs==2&&Lef==21){
+        return 20;
+    }else{
+            switch(q){
 
-        case 1:
-            R(Ra);
-         //   R(Ra);
-               //R(Ra);
-            if(read()=='0'){
-                printf("return 2");
-                 print();
-                return 2;
+                case 1:
+                    R(Ra);
+                 //   R(Ra);
+                       //R(Ra);
+                    if(read()=='0'){
+                        printf("return 2");
+                         print();
+                        return 2;
 
-            }
-          //  R(Ra);
-            if(read()=='1'){
-                printf("return 4");
-                 print();
-                return 4;
+                    }
+                  //  R(Ra);
+                    if(read()=='1'){
+                        printf("return 4");
+                         print();
+                        return 4;
 
-            }
-        break;
-        case 2:
-           R(Rb);
-
-            if(read()=='0'){
-                printf("return 5");
-                 print();
-                return 5;
-
-            }
-           // R(Rb);
-            if(read()=='1'){
-                printf("return 3");
-                 print();
-                return 3;
-
-            }
-            break;
-        case 3:
-            R(Rc);
-
-            if(read()==1){
-                printf("return 17");
-                sigma('1');
-                 print();
-                return 17;
-
-            }
-           // R(Rb);
-            if(read()!='0'||read()!=32){
-                printf("return 15");
-                sigma('0');
-                 print();
-                return 15;
-
-            }
-            break;
-        case 4:
-            R(Rb);
-
-            if(read()=='0'){
-                printf("return 3");
-                 print();
-                return 3;
-
-            }
-           // R(Rb);
-            if(read()=='1'){
-                printf("return 10");
-                 print();
-                return 10;
-
-            }
-            break;
-        case 5:
-
-            R(Rc);
-
-            if(read()=='0'||read()==32){
-                printf("return 6");
-                //here i call to sigma to write
-
-
-                sigma('0');
-             //   printf("\n");
-
-                print();
-                return 6;
-            }
-            if(read()!='1'){
-                printf("return 8");
-                 print();
-                 sigma('0');
-                //here i call to sigma to write
-                return 8;
-            }
-            break;
-        case 6:
-
-            R(Rs);
-
-            if(read()==32){
-                printf("return 7");
-
-                sigma('0');
-             //  printf("\n");
-                print();
-
-                return 7;
-            }
-
-            break;
-
-        case 7:
-                L(Lef);
-                printf("return 1");
-               // printf("\n");
-                print();
-                return 1;
-            break;
-        case 8:
-            R(Rc);
-
-            if(read()==32){
-                printf("return 9");
-
-                 sigma('1');
-                 print();
-                //here i call to sigma to write
-                return 9;
-            }
+                    }
                 break;
-        case 9:
-           L(Lef);
-                printf("return 1");
-               // printf("\n");
-                print();
-                return 1;
-            break;
-        case 10:
-            R(Rc);
+                case 2:
+                   R(Rb);
 
-            if(read()=='0'||read()=='\0'||read()==32){
-                printf("return 11");
-                //here i call to sigma to write
+                    if(read()=='0'){
+                        printf("return 5");
+                         print();
+                        return 5;
+
+                    }
+                   // R(Rb);
+                    if(read()=='1'){
+                        printf("return 3");
+                         print();
+                        return 3;
+
+                    }
+                    break;
+                case 3:
+                    R(Rc);
+
+                    if(read()==1){
+                        printf("return 17");
+                        sigma('1');
+                         print();
+                        return 17;
+
+                    }
+                   // R(Rb);
+                    if(read()!='0'||read()!=32){
+                        printf("return 15");
+                        sigma('0');
+                         print();
+                        return 15;
+
+                    }
+                    break;
+                case 4:
+                    R(Rb);
+
+                    if(read()=='0'){
+                        printf("return 3");
+                         print();
+                        return 3;
+
+                    }
+                   // R(Rb);
+                    if(read()=='1'){
+                        printf("return 10");
+                         print();
+                        return 10;
+
+                    }
+                    break;
+                case 5:
+
+                    R(Rc);
+
+                    if(read()=='0'||read()==32){
+                        printf("return 6");
+                        //here i call to sigma to write
 
 
-                sigma('1');
-             //   printf("\n");
+                        sigma('0');
+                     //   printf("\n");
 
-                print();
-                return 11;
+                        print();
+                        return 6;
+                    }
+                    if(read()!='1'){
+                        printf("return 8");
+                         print();
+                         sigma('0');
+                        //here i call to sigma to write
+                        return 8;
+                    }
+                    break;
+                case 6:
+
+                    R(Rs);
+
+                    if(read()==32){
+                        printf("return 7");
+
+                        sigma('0');
+                     //  printf("\n");
+                        print();
+
+                        return 7;
+                    }
+
+                    break;
+
+                case 7:
+                        L(Lef);
+                        printf("return 1");
+                       // printf("\n");
+                        print();
+                        return 1;
+                    break;
+                case 8:
+                    R(Rc);
+
+                    if(read()==32){
+                        printf("return 9");
+
+                         sigma('1');
+                         print();
+                        //here i call to sigma to write
+                        return 9;
+                    }
+                        break;
+                case 9:
+                   L(Lef);
+                        printf("return 1");
+                       // printf("\n");
+                        print();
+                        return 1;
+                    break;
+                case 10:
+                    R(Rc);
+
+                    if(read()=='0'||read()=='\0'||read()==32){
+                        printf("return 11");
+                        //here i call to sigma to write
+
+
+                        sigma('1');
+                     //   printf("\n");
+
+                        print();
+                        return 11;
+                    }
+                    if(read()!='1'){
+                        printf("return 13");
+
+                         sigma('1');
+                         print();
+                        //here i call to sigma to write
+                        return 13;
+                    }
+                    break;
+                case 11:
+                    R(Rs);
+
+                    if(read()==32){
+                        printf("return 12");
+
+                        sigma('0');
+                     //  printf("\n");
+                        print();
+
+                        return 12;
+                    }
+                    break;
+                case 12:
+                    L(Lef);
+                        printf("return 1");
+                       // printf("\n");
+                        print();
+                    return 1;
+                    break;
+                case 13:
+                    R(Rs);
+
+                    if(read()==32){
+                        printf("return 14");
+
+                        sigma('1');
+                     //  printf("\n");
+                        print();
+
+                        return 14;
+                    }
+                    break;
+                case 14:
+                    L(Lef);
+                        printf("return 1");
+                       // printf("\n");
+                        print();
+                    return 1;
+                    break;
+                case 15:
+                     R(Rs);
+
+                    if(read()==32){
+                        printf("return 16");
+
+                        sigma('1');
+                     //  printf("\n");
+                        print();
+
+                        return 16;
+                    }
+                    break;
+                case 16:
+                    L(Lef);
+                        printf("return 1");
+                       // printf("\n");
+                        print();
+                    return 1;
+                    break;
+
+                case 17:
+                    R(Rs);
+
+                    if(read()==32){
+                        printf("return 18");
+
+                        sigma('0');
+                     //  printf("\n");
+                        print();
+
+                        return 18;
+                    }
+                    break;
+                case 18:
+                    L(Lef);
+                        printf("return 1");
+                       // printf("\n");
+                        print();
+                    return 1;
+                    break;
             }
-            if(read()!='1'){
-                printf("return 13");
 
-                 sigma('1');
-                 print();
-                //here i call to sigma to write
-                return 13;
-            }
-            break;
-        case 11:
-            R(Rs);
 
-            if(read()==32){
-                printf("return 12");
-
-                sigma('0');
-             //  printf("\n");
-                print();
-
-                return 12;
-            }
-            break;
-        case 12:
-            L(Lef);
-                printf("return 1");
-               // printf("\n");
-                print();
-            return 1;
-            break;
-        case 13:
-            R(Rs);
-
-            if(read()==32){
-                printf("return 14");
-
-                sigma('1');
-             //  printf("\n");
-                print();
-
-                return 14;
-            }
-            break;
-        case 14:
-            L(Lef);
-                printf("return 1");
-               // printf("\n");
-                print();
-            return 1;
-            break;
-        case 15:
-             R(Rs);
-
-            if(read()==32){
-                printf("return 16");
-
-                sigma('1');
-             //  printf("\n");
-                print();
-
-                return 16;
-            }
-            break;
-        case 16:
-            L(Lef);
-                printf("return 1");
-               // printf("\n");
-                print();
-            return 1;
-            break;
-
-        case 17:
-            R(Rs);
-
-            if(read()==32){
-                printf("return 18");
-
-                sigma('0');
-             //  printf("\n");
-                print();
-
-                return 18;
-            }
-            break;
-        case 18:
-            L(Lef);
-                printf("return 1");
-               // printf("\n");
-                print();
-            return 1;
-            break;
     }
 
 
