@@ -7,6 +7,7 @@ void Left2(char);
 void Right2(char);
 void sigma(char);
 void print();
+
 //check the states
 int transition_Function(int,char);
 int adder(int);
@@ -65,7 +66,7 @@ int main()
     t[26]=' ';
     t[27]=' ';
     t[28]=' ';
-
+    printf("Running:");
     print();
   /*  R(16);
     printf("carry %c",c_out());
@@ -81,31 +82,48 @@ int main()
     return 0;
 }
 int transition_Function(int q){
-  Ra-=1;//--move
+  /*Ra-=1;//--move
     //Rb=9;//static move
     Rc+=1;//++where we count the carry
     Rs-=1;//-- where we move to write in s
     Lef-=1;//-- we move to the left
-    //printf("Ra [%i] Rb[%i ]Rc [%i] Rs [%i] Left [%i]\n",Ra,Rb,Rc,Rs,Lef);
-    if(Ra==-1&&Rc==11&&Rs==0&&Lef==19){
+    */
+   // printf("Ra [%i] Rb[%i ]Rc [%i] Rs [%i] Left [%i]\n",Ra,Rb,Rc,Rs,Lef);
+
+    //if(Ra==-1&&Rc==11&&Rs==0&&Lef==19){
             //print();
-        return 20;
-    }else{
+      //  return 20;
+    //}else{
             switch(q){
 
+
                 case 1:
+
+
+                    print();
+
+                    Ra-=1;
+                            Rb=9;//static move
+                            Rc+=1;//++where we count the carry
+                            Rs-=1;//-- where we move to write in s
+                            Lef-=1;//-- we move to the left
+
                     R(Ra);
+                    printf("honey");
                  //   R(Ra);
                        //R(Ra);
                     if(read()=='0'){
                         printf("return 2");
+
                          print();
+
                         return 2;
 
                     }
                   //  R(Ra);
                     if(read()=='1'){
                         printf("return 4");
+
                          print();
                         return 4;
 
@@ -117,6 +135,7 @@ int transition_Function(int q){
                     if(read()=='0'){
                         printf("return 5");
                          print();
+
                         return 5;
 
                     }
@@ -130,8 +149,8 @@ int transition_Function(int q){
                     break;
                 case 3:
                     R(Rc);
-
-                    if(read()==1){
+                        printf("RC %i",Rc);
+                    if(read()=='1'){
                         printf("return 17");
                         sigma('1');
                          print();
@@ -167,8 +186,8 @@ int transition_Function(int q){
                 case 5:
 
                     R(Rc);
-
-                    if(read()=='0'||read()==32){
+                        printf("Rc %i",Rc);
+                    if(read()=='0'||read()=='\0'||read()==32){
                         printf("return 6");
                         //here i call to sigma to write
 
@@ -179,7 +198,7 @@ int transition_Function(int q){
                         print();
                         return 6;
                     }
-                    if(read()!='1'){
+                    if(read()=='1'){
                         printf("return 8");
                          print();
                          sigma('0');
@@ -206,13 +225,13 @@ int transition_Function(int q){
                 case 7:
                         L(Lef);
                         printf("return 1");
-                       // printf("\n");
+                        printf("LEFT");
                         print();
                         return 1;
                     break;
                 case 8:
-                    R(Rc);
-
+                    R(Rs);
+                    printf("RC %i+",Rc);
                     if(read()==32){
                         printf("return 9");
 
@@ -225,13 +244,14 @@ int transition_Function(int q){
                 case 9:
                    L(Lef);
                         printf("return 1");
-                       // printf("\n");
+                       printf("LEFT");
+
                         print();
                         return 1;
                     break;
                 case 10:
                     R(Rc);
-
+                        printf("RC %i",Rc);
                     if(read()=='0'||read()=='\0'||read()==32){
                         printf("return 11");
                         //here i call to sigma to write
@@ -268,7 +288,7 @@ int transition_Function(int q){
                 case 12:
                     L(Lef);
                         printf("return 1");
-                       // printf("\n");
+                       printf("LEFT");
                         print();
                     return 1;
                     break;
@@ -288,7 +308,7 @@ int transition_Function(int q){
                 case 14:
                     L(Lef);
                         printf("return 1");
-                       // printf("\n");
+                       printf("LEFT");
                         print();
                     return 1;
                     break;
@@ -308,7 +328,7 @@ int transition_Function(int q){
                 case 16:
                     L(Lef);
                         printf("return 1");
-                       // printf("\n");
+                       printf("LEFT");
                         print();
                     return 1;
                     break;
@@ -329,28 +349,31 @@ int transition_Function(int q){
                 case 18:
                     L(Lef);
                         printf("return 1");
-                       // printf("\n");
+                       printf("LEFT");
                         print();
                     return 1;
                     break;
             }
 
 
-    }
+   // }
 
 
 }
 int adder(int qq){
     int q=0;
     int a=0;
-    if(qq==20){
+    if(qq==24){
 
                 printf("died");
 
     }else{
+
         q=transition_Function(qq);
 
+
         a=adder(q);
+
     }
     return a;
 }
@@ -391,6 +414,7 @@ printf("h1 %i",header);
 }
 void R(int r=1){
     header+=r;
+    printf(" >header %i< ",header);
 
 
     /*for (iter=t.begin(); iter<=7; ++iter){
@@ -445,10 +469,18 @@ char read(){
     }
 
 }
+
 void print(){printf("\n");
+                if(header==0){
+                    std::cout<<".";
+                }
     for(iter=t.begin();iter!=t.end();++iter){
 
-            std::cout <<"["<<iter->second<<"]";
+
+                if(header==iter->first){
+                    std::cout<<".";
+                }
+                std::cout <<"["<<iter->second<<"]";
     }
 
 }
