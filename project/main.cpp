@@ -15,13 +15,12 @@ void test();
 
 char read();
 
-//char c_out();
 
 typedef std::map<int,char> tape;
 typedef std::map<int,char>::iterator it;
 typedef std::map<int,char>::reverse_iterator itt;
 
-int itera();
+
 
 it iter;
 itt iterb;
@@ -68,14 +67,11 @@ int main()
     t[28]=' ';
     printf("Running:");
     print();
-  /*  R(16);
-    printf("carry %c",c_out());
-*/
+
     printf("\n\n\n");
 
 
     test();
-    //R(8);
     printf("\n\n\n");
 
     print();
@@ -90,7 +86,7 @@ int transition_Function(int q){
     */
    // printf("Ra [%i] Rb[%i ]Rc [%i] Rs [%i] Left [%i]\n",Ra,Rb,Rc,Rs,Lef);
 
-    //if(Ra==-1&&Rc==11&&Rs==0&&Lef==19){
+   // if(header==-1){
             //print();
       //  return 20;
     //}else{
@@ -102,16 +98,13 @@ int transition_Function(int q){
 
                     print();
 
-                    Ra-=1;
+                            Ra-=1;//--move
                             Rb=9;//static move
                             Rc+=1;//++where we count the carry
                             Rs-=1;//-- where we move to write in s
                             Lef-=1;//-- we move to the left
 
                     R(Ra);
-                    printf("honey");
-                 //   R(Ra);
-                       //R(Ra);
                     if(read()=='0'){
                         printf("return 2");
 
@@ -120,7 +113,6 @@ int transition_Function(int q){
                         return 2;
 
                     }
-                  //  R(Ra);
                     if(read()=='1'){
                         printf("return 4");
 
@@ -139,7 +131,6 @@ int transition_Function(int q){
                         return 5;
 
                     }
-                   // R(Rb);
                     if(read()=='1'){
                         printf("return 3");
                          print();
@@ -149,7 +140,6 @@ int transition_Function(int q){
                     break;
                 case 3:
                     R(Rc);
-                        printf("RC %i",Rc);
                     if(read()=='1'){
                         printf("return 17");
                         sigma('1');
@@ -157,7 +147,6 @@ int transition_Function(int q){
                         return 17;
 
                     }
-                   // R(Rb);
                     if(read()!='0'||read()!=32){
                         printf("return 15");
                         sigma('0');
@@ -175,7 +164,6 @@ int transition_Function(int q){
                         return 3;
 
                     }
-                   // R(Rb);
                     if(read()=='1'){
                         printf("return 10");
                          print();
@@ -186,15 +174,12 @@ int transition_Function(int q){
                 case 5:
 
                     R(Rc);
-                        printf("Rc %i",Rc);
                     if(read()=='0'||read()=='\0'||read()==32){
                         printf("return 6");
-                        //here i call to sigma to write
+                        //here i call to sigma to write on the tape
 
 
                         sigma('0');
-                     //   printf("\n");
-
                         print();
                         return 6;
                     }
@@ -202,7 +187,7 @@ int transition_Function(int q){
                         printf("return 8");
                          print();
                          sigma('0');
-                        //here i call to sigma to write
+                        //here i call to sigma to write on the tape
                         return 8;
                     }
                     break;
@@ -214,7 +199,7 @@ int transition_Function(int q){
                         printf("return 7");
 
                         sigma('0');
-                     //  printf("\n");
+
                         print();
 
                         return 7;
@@ -231,13 +216,12 @@ int transition_Function(int q){
                     break;
                 case 8:
                     R(Rs);
-                    printf("RC %i+",Rc);
                     if(read()==32){
                         printf("return 9");
 
                          sigma('1');
                          print();
-                        //here i call to sigma to write
+                        //here i call to sigma to write on the tape
                         return 9;
                     }
                         break;
@@ -251,14 +235,13 @@ int transition_Function(int q){
                     break;
                 case 10:
                     R(Rc);
-                        printf("RC %i",Rc);
                     if(read()=='0'||read()=='\0'||read()==32){
                         printf("return 11");
                         //here i call to sigma to write
 
 
                         sigma('1');
-                     //   printf("\n");
+
 
                         print();
                         return 11;
@@ -353,17 +336,20 @@ int transition_Function(int q){
                         print();
                     return 1;
                     break;
+                default:
+                    return 20;
+                    break;
             }
 
 
-   // }
+    //}
 
 
 }
 int adder(int qq){
-    int q=0;
+    int q=0;//the next state
     int a=0;
-    if(qq==24){
+    if(qq==20){
 
                 printf("died");
 
@@ -378,7 +364,7 @@ int adder(int qq){
     return a;
 }
 void test(){
-    printf("\nSTATE: %i",adder(1));
+    adder(1);
    /* R(Ra);
     printf("1=%c",read());
     R(Rb);
@@ -399,7 +385,6 @@ void L(int l){
     }else{
         header=l;
     }
-//printf("h1 %i",header);
 
    /* header-=l;
 
@@ -419,7 +404,7 @@ void R(int r=1){
 
     /*for (iter=t.begin(); iter<=7; ++iter){
             std::cout <<"in R " << read();
-    }*//*
+    }*//* first drill attempt
     for (iter=t.begin(); iter!=t.end(); ++iter){
         if(iter->first==r){//check the if the key is equals to r
             //printf("%i ->%c",r ,read());
@@ -455,7 +440,7 @@ void sigma(char s){
    /* for(iter;iter!=t.end();++iter){
         iter->second=s;
     }*/
-//t[Rs]=s;nope
+
 }
 
 char read(){
@@ -470,17 +455,17 @@ char read(){
 
 }
 
-void print(){printf("\n");
-                if(header==0){
-                    std::cout<<".";
-                }
-    for(iter=t.begin();iter!=t.end();++iter){
-
-
+void print(){
+                printf("\n");
+          if(header==0){
+             std::cout<<".";
+          }
+          for(iter=t.begin();iter!=t.end();++iter){
                 if(header==iter->first){
                     std::cout<<".";
                 }
-                std::cout <<"["<<iter->second<<"]";
-    }
+                std::cout <<iter->second;
+          }
 
 }
+
